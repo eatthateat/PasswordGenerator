@@ -1,1 +1,1 @@
-# PasswordGenerator
+# WPF Password Generator

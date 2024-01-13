@@ -1,4 +1,3 @@
 # WPF Password Generator
 
-![PassGen-screenshot](https://github.com/eatthateat/PasswordGenerator/assets/118101890/c0d63497-e805-4c9c-8c10-ec8d6b5ee7c0)
-
+![Untitled](https://github.com/eatthateat/PasswordGenerator/assets/118101890/7e2e3eb5-6107-4676-b0dd-3015b82fb8d1)

@@ -1,0 +1,292 @@
+﻿      <Window x:Class="PasswordGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PasswordGenerator"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen" WindowStyle="None" 
+        AllowsTransparency="True" Background="Transparent" 
+        Height="570 " Width="370" ResizeMode="CanMinimize">
+
+    <Window.Resources>
+
+        <LinearGradientBrush x:Key="OneColor_Gradient_ThemeSwitch" EndPoint="0.5,1" StartPoint="0.5,0">
+            <LinearGradientBrush.RelativeTransform>
+                <TransformGroup>
+                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                    <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                    <RotateTransform Angle="-15.945" CenterX="0.5" CenterY="0.5"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </LinearGradientBrush.RelativeTransform>
+            <GradientStop Color="#8000FF" Offset="0"/>
+            <GradientStop Color="#A400FF" Offset="1"/>
+        </LinearGradientBrush>
+
+        <Style x:Key="ToggleButton_ThemeSwitch" TargetType="{x:Type ToggleButton}">
+            <Setter Property="IsChecked" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Grid Height="25" Width="45" 
+                          VerticalAlignment="Top" HorizontalAlignment="Right">
+
+                            <Border x:Name="ToggleBG" Background="{DynamicResource OneColor_Gradient_ThemeSwitch}" 
+                                CornerRadius="12.5" />
+
+                            <Grid x:Name="Toggle" Width="18" Height="18" Margin="18,0,0,0">
+                                <Ellipse x:Name="ToggleEllipse" 
+                                         Fill="{DynamicResource ThemeDotGradient}">
+
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect x:Name="DropShadow" BlurRadius="6" Color="White" 
+                                                          ShadowDepth="0" Opacity="1"/>
+                                    </Ellipse.Effect>
+
+                                </Ellipse>
+                                <Grid x:Name="Craters" Opacity="1">
+                                    <Ellipse Fill="#C3C3C3" Width="5" Height="5" HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center" Margin="0,0,6,5" Opacity="1"/>
+                                    <Ellipse Fill="#C3C3C3" Width="3" Height="3" HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center" Margin="12,0,0,0" Opacity="1"/>
+                                    <Ellipse Fill="#C3C3C3" Width="3" Height="3" HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center" Margin="0,10,4,0" Opacity="1"/>
+                                    <Ellipse Fill="#C3C3C3" Width="2" Height="2" HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center" Margin="0,3,10,0" Opacity="1"/>
+                                    <Ellipse Fill="#C3C3C3" Width="2" Height="2" HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center" Margin="4,0,0,10" Opacity="1"/>
+                                    <Ellipse Fill="#C3C3C3" Width="2" Height="2" HorizontalAlignment="Center" 
+                                             VerticalAlignment="Center" Margin="8,11,0,0" Opacity="1"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                            <!--Event Trigger checked-->
+                            <EventTrigger RoutedEvent="Checked">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetName="Toggle"
+                                                        Storyboard.TargetProperty="Margin"
+                                                        To="18,0,0,0" Duration="0:0:0.15" />
+
+                                        <DoubleAnimation Storyboard.TargetName="Craters"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" Duration="0:0:0.15"/>
+
+                                        <ColorAnimation Storyboard.TargetName="ToggleEllipse"
+                                                        Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[0].Color"
+                                                        To="#EEF8FE" Duration="0:0:0.15"/>
+                                        <ColorAnimation Storyboard.TargetName="ToggleEllipse"
+                                                        Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[1].Color"
+                                                        To="#C3CBD0" Duration="0:0:0.15"/>
+
+                                        <ColorAnimation Storyboard.TargetName="ToggleBG"
+                                                        Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].Color"
+                                                        To="#8000FF" Duration="0:0:0.15"/>
+                                        <ColorAnimation Storyboard.TargetName="ToggleBG"
+                                                        Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].Color"
+                                                        To="#A400FF" Duration="0:0:0.15"/>
+
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                            <!--Event trigger Unchecked-->
+                            <EventTrigger RoutedEvent="Unchecked">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ThicknessAnimation Storyboard.TargetName="Toggle"
+                                            Storyboard.TargetProperty="Margin"
+                                            To="-18,0,0,0" Duration="0:0:0.15" />
+
+                                        <DoubleAnimation Storyboard.TargetName="Craters"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0" Duration="0:0:0.15"/>
+
+                                        <ColorAnimation Storyboard.TargetName="ToggleEllipse"
+                                                        Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[0].Color"
+                                                        To="#FFC14D" Duration="0:0:0.15"/>
+                                        <ColorAnimation Storyboard.TargetName="ToggleEllipse"
+                                                        Storyboard.TargetProperty="(Ellipse.Fill).(LinearGradientBrush.GradientStops)[1].Color"
+                                                        To="#F9F871" Duration="0:0:0.15"/>
+                                        
+                                        <ColorAnimation Storyboard.TargetName="ToggleBG"
+                                                    Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[0].Color"
+                                                    To="#9FD4FF" Duration="0:0:0.15"/>
+                                        <ColorAnimation Storyboard.TargetName="ToggleBG"
+                                                    Storyboard.TargetProperty="(Border.Background).(LinearGradientBrush.GradientStops)[1].Color"
+                                                    To="#B5DDFD" Duration="0:0:0.15"/>
+
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <RadialGradientBrush x:Key="ThemeDotGradient">
+            <GradientStop Color="#EEF8FE"/>
+            <GradientStop Color="#C3CBD0" Offset="1"/>
+        </RadialGradientBrush>
+
+    </Window.Resources>
+
+    <!--Main window-->
+    <Border Background="{DynamicResource PrimaryBackground}" CornerRadius="25" Margin="0">
+        <Grid Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="225" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <!--#region Top grid-->
+            <Grid Grid.Row="0">
+
+                <!--Theme toggle-->
+                <CheckBox Style="{DynamicResource ToggleButton_ThemeSwitch}"
+                      Grid.Row="0"
+                      VerticalAlignment="Top" HorizontalAlignment="Right"
+                      Margin="0,5,80,0" Click="Theme_Toggle"/>
+
+                <!--#region Close button-->
+                <Button Style="{DynamicResource CloseButtonStyle}" Margin="0,5,5,0" 
+                        VerticalAlignment="Top" HorizontalAlignment="Right" Click="Close_Button_Click"/>
+                <!--#endregion-->
+
+                <!--#region Minimize button-->
+                <Button Style="{DynamicResource MinimizeButtonStyle}" Margin="0,5,40,0"
+                        VerticalAlignment="Top" HorizontalAlignment="Right" Click="Minimize_Button_Click"/>
+                <!--#endregion-->
+
+                <!--#region Slider-->
+                <Grid VerticalAlignment="Top" Margin="15,65,15,0"
+                      Width="310" Height="35">
+
+                    <Slider Style="{DynamicResource SliderStyle}" x:Name="LengthSlider"
+                             Minimum="5" Maximum="35" SmallChange="1"
+                            Value="20" Width="310"
+                            ValueChanged="Slider_Change" VerticalAlignment="Top" HorizontalAlignment="Center"
+                            IsSnapToTickEnabled="True"/>
+
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" 
+                               Text="Password Length" FontFamily="Montserrat" 
+                               FontSize="14" Foreground="{DynamicResource Text}" FontWeight="Regular" Margin="10,17,0,0"/>
+
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" 
+                               Text="{Binding Path=Value, ElementName=LengthSlider}" FontFamily="Montserrat" 
+                               FontSize="14" Foreground="{DynamicResource Gradient1}" FontWeight="Medium" Margin="0,17,10,0"/>
+
+                </Grid>
+                <!--#endregion-->
+
+                <!--#region Options toggle-->
+                <StackPanel x:Name="Options" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+
+                    <StackPanel Orientation="Horizontal" Height="25" Width="300" Margin="5,0,0,7">
+                        <CheckBox x:Name="Capitals" Style="{DynamicResource ToggleButtonUnchecked}" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" Click="Toggle_Capitals" Margin="6,0,0,0"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                   Text="Uppercase Letters" FontFamily="Montserrat" 
+                                   FontSize="20" Foreground="{DynamicResource Text}" FontWeight="Regular" Margin="7,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal"  Height="25" Width="300" Margin="5,0,0,7">
+                        <CheckBox x:Name="Numbers" Style="{DynamicResource ToggleButtonUnchecked}" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" Click="Toggle_Numbers" Margin="6,0,0,0"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                   Text="Numbers" FontFamily="Montserrat" 
+                                   FontSize="20" Foreground="{DynamicResource Text}" FontWeight="Regular" Margin="7,0,0,0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Height="25" Width="300" Margin="5,0,0,0">
+                        <CheckBox x:Name="SpecialCharacters" Style="{DynamicResource ToggleButtonUnchecked}" 
+                                  VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" Click="Toggle_SC" Margin="6,0,0,0"/>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                   Text="Special Characters" FontFamily="Montserrat" 
+                                   FontSize="20" Foreground="{DynamicResource Text}" FontWeight="Regular" Margin="7,0,0,0"/>
+                    </StackPanel>
+
+                </StackPanel>
+
+            </Grid>
+            <!--#endregion-->
+
+            <!--#endregion-->
+
+            <!--#region Bottom grid-->
+            <Grid Grid.Row="1" VerticalAlignment="Center" Height="315">
+
+                <!--Passwords background-->
+                <Border Background="{DynamicResource SecondaryBackground}" Width="300" Height="185" 
+                        VerticalAlignment="Bottom" Margin="0,0,0,20" CornerRadius="15"/>
+
+                <!--Textboxes for final passwords-->
+                <StackPanel x:Name="passPanel" VerticalAlignment="Bottom" Margin="0,0,0,25" Width="300" >
+                    <TextBox x:Name="pass1" Style="{DynamicResource PassBoxStyle1}" PreviewMouseDown="TextBox_Copy"/>
+                    <TextBox x:Name="pass2" Style="{DynamicResource PassBoxStyle1}" PreviewMouseDown="TextBox_Copy"/>
+                    <TextBox x:Name="pass3" Style="{DynamicResource PassBoxStyle1}" PreviewMouseDown="TextBox_Copy"/>
+                    <TextBox x:Name="pass4" Style="{DynamicResource PassBoxStyle1}" PreviewMouseDown="TextBox_Copy"/>
+                    <TextBox x:Name="pass5" Style="{DynamicResource PassBoxStyle1}" PreviewMouseDown="TextBox_Copy"/>
+                </StackPanel>
+
+                <!--Generate button-->
+                <Button Style="{DynamicResource GenerateButtonStyle}" 
+                    VerticalAlignment="Top" HorizontalAlignment="Center" Content="Generate" 
+                    Click="Fill_TextBoxes" Margin="0,24,0,0" >
+                </Button>
+
+                <!--#region Popup-->
+                <Grid x:Name="Popup" Width="210" Height="38" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-60" Opacity="0">
+                    <Border IsHitTestVisible="False" Width="auto" Height="auto" Background="{DynamicResource PrimaryBackground}" BorderBrush="{DynamicResource PopupBorder}"
+                            CornerRadius="8" BorderThickness="2">
+
+                    </Border>
+                    <TextBlock IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Password copied to clipboard"
+                               FontFamily="Montserrat" Foreground="{DynamicResource Text}"/>
+                    <Grid.Resources>
+                        <Storyboard x:Key="Copied_Popup">
+                            <ThicknessAnimation Storyboard.TargetName="Popup"
+                                                Storyboard.TargetProperty="Margin"
+                                                To="0,0,0,10" Duration="0:0:0.35">
+                                <ThicknessAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseOut" />
+                                </ThicknessAnimation.EasingFunction>
+                            </ThicknessAnimation>
+
+                            <DoubleAnimation Storyboard.TargetName="Popup"
+                                             Storyboard.TargetProperty="Opacity"
+                                             BeginTime="0:0:0.1"
+                                             To="1.0" Duration="0:0:0.3"/>
+
+                            <ThicknessAnimation Storyboard.TargetName="Popup"
+                                                Storyboard.TargetProperty="Margin"
+                                                BeginTime="0:0:1.5"
+                                                To="0,0,0,-60" Duration="0:0:0.4">
+                                <ThicknessAnimation.EasingFunction>
+                                    <QuadraticEase EasingMode="EaseIn" />
+                                </ThicknessAnimation.EasingFunction>
+                            </ThicknessAnimation>
+
+                            <DoubleAnimation Storyboard.TargetName="Popup"
+                                             Storyboard.TargetProperty="Opacity"
+                                             BeginTime="0:0:1.6"
+                                             To="0.0" Duration="0:0:0.3"/>
+                        </Storyboard>
+                    </Grid.Resources>
+                </Grid>
+                <!--#endregion-->
+
+            </Grid>
+            <!--#endregion-->
+
+        </Grid>
+    </Border>
+</Window>
+ 
